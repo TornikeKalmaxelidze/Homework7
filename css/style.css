@@ -6,8 +6,16 @@ table, tr, td, th {
 
 th {
     width: 350px;
+ 
 }
-
+span {
+    cursor: pointer;
+}
 td {
     text-align: left;
+}
+body {
+    display: flex;
+    justify-content: center;
+
 }
