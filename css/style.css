@@ -14,8 +14,34 @@ span {
 td {
     text-align: left;
 }
+input {
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    left: 110px;
+    top: 150px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 15px;
+}
 body {
-    display: flex;
-    justify-content: center;
+ display: flex;
+ justify-content: center;
+}
+.Higher {
+    width: 150px;
+    height: 50px;
+    position: absolute;
+    right: 100px;
+    top: 200px;
+    cursor: pointer;
+}
+.Lower {
+    width: 150px;
+    height: 50px;
+    position: absolute;
+    right: 100px;
+    top: 350px;
+    cursor: pointer;
 
 }

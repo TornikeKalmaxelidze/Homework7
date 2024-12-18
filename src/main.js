@@ -1,57 +1,52 @@
+
 function getCities() {
     const cities = [];
-
     for (let i = 0; i < 50; i++) {
-        cities.push({
-            name: `City ${i}`,
-            population: Math.floor((Math.random() * 9000000) + 50000)
-        })
+      cities.push({
+        name: `City ${i}`,
+        population: Math.floor((Math.random() * 90000) + 50000)
+      });
     }
     return cities;
- 
-}
+  }
 
-const cities = getCities();
-const citiesTable = document.getElementById('cities-table');
-let sorted = false;
+  const cities = getCities();
+  const originalCities = [...cities]; 
+  const citiesTable = document.getElementById('cities-table');
+  let sorted = false;
 
-cities.forEach(({ name, population }) => {
-    const tr = document.createElement('tr');
+  function renderTable(data) {
+    const tbody = citiesTable.querySelector('tbody');
+    tbody.innerHTML = ''; 
+    data.forEach(({ name, population }) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${name}</td><td>${population}</td>`;
+      tbody.appendChild(tr);
+    });
+  }
 
-    tr.innerHTML = (`<td>${name}</td>
-    <td>${population}</td>`)
-    citiesTable.querySelector('tbody').appendChild(tr);
-})
+  renderTable(cities);
 
-const header = citiesTable.querySelectorAll('th')[1];
-const headerIndicator = header.querySelector('span');
+  const header = citiesTable.querySelectorAll('th')[1]
+  const headerIndicator = header.querySelector('span');
 
-console.log(header);
-header.onclick = () => {
-    sorted = !sorted;
-    if (sorted) {
-        headerIndicator.innerText = '▼';
-    } else {
-        headerIndicator.innerText = '▲';
-    }
-    citiesTable.querySelector('tbody').innerHTML = '';
-    cities.sort((c1, c2) => {
-        if (sorted)
-            return c2.population - c1.population;
-        return c1.population - c2.population;
-    })
-        .forEach(({ name, population }) => {
-            const tr = document.createElement('tr');
 
-            tr.innerHTML = (`<td>${name}</td>
-        <td>${population}</td>`)
-            citiesTable.querySelector('tbody').appendChild(tr);
-        })
-      
-}
-// const resetButton = document.getElementById('reset-button');
-// resetButton.onclick = () => {
-//     cities.length = 0; 
-//     cities.push(...originalCities);
-//     renderCities(cities); 
-// };  reset rogor unda ver mixvdi da mainteresebs rogor aris shesadzlebeli
+
+  const resetButton = document.getElementById('reset-button');
+  resetButton.onclick = () => {
+    sorted = false;
+    headerIndicator.innerText = '';
+    cities.splice(0, cities.length, ...originalCities);
+    renderTable(cities);
+
+  };
+  
+  document.getElementById('Higher').onclick = () => {
+    cities.sort((c1, c2) => c2.population - c1.population); 
+    renderTable(cities);
+  };
+
+  document.getElementById('Lower').onclick = () => {
+    cities.sort((c1, c2) => c1.population - c2.population); 
+    renderTable(cities);
+  };
